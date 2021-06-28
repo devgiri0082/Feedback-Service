@@ -1,11 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { Box, Container } from "./Styles/Containers";
-import { DefaultButton, MainTitle, Messages } from "./Styles/Texts";
+import { DefaultButton, ErrorShow, MainTitle, Messages } from "./Styles/Texts";
 import firebase from "firebase";
 import { db } from "./Redux/FirebaseConfig";
 
 export default function Signup() {
+    let [error, setError] = useState("");
     let userNameRef = useRef();
     let emailRef = useRef();
     let passwordRef = useRef();
@@ -23,6 +24,7 @@ export default function Signup() {
             let data = await db.collection("users").doc(userNameRef.current.value).get();
             if (data.exists) {
                 console.log("invalid, userName");
+                setError("invalid, userName");
                 return;
             }
             let signupStatus = await firebase.auth().createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value);
@@ -41,6 +43,7 @@ export default function Signup() {
             navigateTo("login");
         } catch (err) {
             console.log(err);
+            setError(err.message);
         }
     }
     return (
@@ -56,6 +59,7 @@ export default function Signup() {
                 <Messages>Password Again: </Messages>
                 <input type="password" ref={passwordAgainRef} />
                 <DefaultButton onClick={createAccount}>Submit</DefaultButton>
+                <ErrorShow>{error}</ErrorShow>
             </Box>
             <DefaultButton onClick={() => navigateTo("login")}>Login</DefaultButton>
         </Container>

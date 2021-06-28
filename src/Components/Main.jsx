@@ -8,10 +8,6 @@ let AppContainer = styled(Container)`
 
 let Title = styled(MainTitle)`
 `
-
-let InputPlace = styled.div`
-
-`
 let Message = styled(Messages)`
 `
 export default function Main() {
@@ -25,9 +21,6 @@ export default function Main() {
             <Title>
                 Welcome to Anonymous Feedback Service
             </Title>
-            <InputPlace>
-                Enter the feedback link: <input type="text" />
-            </InputPlace>
             <Message>If you already have an account: </Message>
             <DefaultButton onClick={() => navigateTo("login")}> Sign In</DefaultButton>
             <Message>If you don't have an account: </Message>
