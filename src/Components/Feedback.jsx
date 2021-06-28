@@ -19,7 +19,7 @@ export default function Feedback() {
         if (!data.exists) {
             navigateTo("");
         }
-        setEmail(data.data().Email)
+        setEmail(data.data().Email);
     }
     useEffect(() => {
         checkValid()
@@ -27,6 +27,7 @@ export default function Feedback() {
     }, [])
     let submitMessage = async () => {
         let response = await db.collection(email.split(".").join("_")).doc("Message").collection("Message").doc().set({ message: messageRef.current.value });
+        messageRef.current.value = "";
         console.log(response);
     }
     return (
