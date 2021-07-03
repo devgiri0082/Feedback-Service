@@ -17,6 +17,7 @@ export let DefaultButton = styled.button`
     border-radius: 5px;
     margin-top: 10px;
     display: block;
+    cursor: pointer;
     &:hover {
         color: tomato;
         border: 1px solid tomato;

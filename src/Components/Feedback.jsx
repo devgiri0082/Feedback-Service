@@ -19,7 +19,10 @@ export default function Feedback() {
         if (!data.exists) {
             navigateTo("");
         }
-        setEmail(data.data().Email);
+        else {
+            setEmail(data.data().Email);
+        }
+
     }
     useEffect(() => {
         checkValid()
